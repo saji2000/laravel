@@ -5,6 +5,11 @@
     <title>Document</title>
 </head>
 <body>
+    @auth
+    <p>Welcome back {{auth()->user()->name}}!</p>
+    @else
+    <p>Please register or log in.</p>
+    @endauth
     <div style="border: 3px solid black;">
         <h2>Home Page</h2>
         <form action="/register" method="POST">
