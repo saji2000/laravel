@@ -6,10 +6,13 @@
 </head>
 <body>
     @auth
-    <p>Welcome back {{auth()->user()->name}}!</p>
+    <p>Congrats you are logged in {{auth()->user()->name}}!</p>
+    <form action="/logout" method="POST">
+        @csrf
+        <button>Log Out</button>
+    </form>
     @else
     <p>Please register or log in.</p>
-    @endauth
     <div style="border: 3px solid black;">
         <h2>Home Page</h2>
         <form action="/register" method="POST">
@@ -19,5 +22,15 @@
         <input name="password" type="password" placeholder="password">
         <button type="submit">Submit</button>
     </div>
+
+    <div style="border: 3px solid black;">
+        <h2>Login</h2>
+        <form action="/login" method="POST">
+        @csrf
+        <input name="loginname" type="text" placeholder="name">
+        <input name="loginpassword" type="password" placeholder="password">
+        <button type="submit">Submit</button>
+    </div>
+    @endauth
 </body>
 </html>
