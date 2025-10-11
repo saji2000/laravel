@@ -11,6 +11,16 @@
         @csrf
         <button>Log Out</button>
     </form>
+    <div style="border: 3px solid black;">
+        <h2>Create a new post</h2>
+        <form action="/create-post" method="POST">
+        @csrf
+        <input type='text' name='title' placeholder='title'>
+        <textarea name="body" placeholder="body"></textarea>
+        <button type="submit">Save Post</button>
+        </form>
+    </div>
+
     @else
     <p>Please register or log in.</p>
     @if(session('error'))
