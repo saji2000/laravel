@@ -16,7 +16,7 @@
         <form action="/create-post" method="POST">
         @csrf
         <input type='text' name='title' placeholder='title'>
-        <textarea name="body" placeholder="body"></textarea>
+        <textarea name="body" placeholder="body Content"></textarea>
         <button type="submit">Save Post</button>
         </form>
     </div>
