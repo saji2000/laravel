@@ -23,4 +23,8 @@ class PostController extends Controller
 
         return redirect('/')->with('success', 'Post created!');
     }
+
+    // public function allPosts(){
+    //     return 
+    // }
 }
