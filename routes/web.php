@@ -4,9 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Models\Post;
+use App\Models\User;
 
 Route::get('/', function () {
-    $posts = Post::where('user_id', auth()->id())->get();
+
+    $posts = [];
+    if (auth()->check()){
+        $posts = auth()->user()->userPosts()->latest()->get();
+    }
+    
     return view('home', ['posts' => $posts]);
 });
 
