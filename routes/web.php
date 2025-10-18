@@ -25,4 +25,6 @@ Route::post('/login', [UserController::class, 'login']);
 // Blog post routes
 Route::post('/create-post', [PostController::class, 'createPost']);
 
+Route::get('/edit-post/{post}', [PostController::class, 'editPostForm']);
+
 // Route::get('/all-posts', [PostController::class, 'allPosts']);

@@ -27,6 +27,11 @@
             <h3>{{$post->title}}</h3>
             {{-- <p>by {{$post->user->name}}</p> --}}
             <p>{{$post->body}}</p>
+            <p><a href="/edit-post/{{$post->id}}">Edit Post</a></p>
+            <form action="/delete-post/{{$post->id}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Delete Post</button>
             <hr>
         </div>
         @endforeach

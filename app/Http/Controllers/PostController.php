@@ -35,4 +35,8 @@ class PostController extends Controller
         }
     }
 
+    public function editPostForm(Post $post){
+        return view('edit-post', ['post' => $post]);
+    }
+
 }
