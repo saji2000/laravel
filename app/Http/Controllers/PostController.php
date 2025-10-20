@@ -36,7 +36,25 @@ class PostController extends Controller
     }
 
     public function editPostForm(Post $post){
+        if (auth()->id() !== $post->user_id){
+            return redirect('/')->with('error', 'You do not have permission to edit this post.');
+        }
         return view('edit-post', ['post' => $post]);
+    }
+
+    public function updatePost(Request $request, Post $post){
+        if (auth()->id() !== $post->user_id){
+            return redirect('/')->with('error', 'You do not have permission to edit this post.');
+        }
+        $incomingFields = $request->validate([
+            'title' => ['required', 'min:3', 'max:100'],
+            'body' => ['required', 'min:3', 'max:1000']
+        ]); 
+
+        $incomingFields['title'] = strip_tags($incomingFields['title']);
+        $incomingFields['body'] = strip_tags($incomingFields['body']);
+        $post->update($incomingFields);
+        return redirect('/')->with('success', 'Post updated!');
     }
 
 }
