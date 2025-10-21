@@ -57,4 +57,11 @@ class PostController extends Controller
         return redirect('/')->with('success', 'Post updated!');
     }
 
+    public function deletePost(Post $post){
+        if (auth()->id() !== $post->user_id){
+            return redirect('/')->with('error', 'You do not have permission to delete this post.');
+        }
+        $post->delete();
+        return redirect('/')->with('success', 'Post deleted!');
+    }
 }
