@@ -24,11 +24,13 @@
         <h2>All Posts</h2>
         @foreach($posts as $post)
         <div style="background-color: lightgray; margin-bottom: 20px; padding: 10px;">
-            <h3>{{$post->title}} by {{$post->user->name}}</h3>
+            <h3>{{$post->title}} by {{$post->user->name}} ({{$post->usersEmail()}})</h3>
             {{-- <p>by {{$post->user->name}}</p> --}}
             <p>{{$post->body}}</p>
+            <p>Created at: {{$post->created_at}}</p>
+            <p>Last updated: {{$post->updated_at}}</p>
             <p><a href="/edit-post/{{$post->id}}">Edit Post</a></p>
-            <form action="/delete-post/{{$post->id}}" method="POST">
+            <form action="/delete-post/{{$post->id}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
                 @csrf
                 @method('DELETE')
                 <button type="submit">Delete Post</button>
