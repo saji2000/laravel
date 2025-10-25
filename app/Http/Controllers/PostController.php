@@ -27,7 +27,7 @@ class PostController extends Controller
         try {
             $post = Post::create($incomingFields);
             error_log("Post created id={$post->id} user_id={$post->user_id} title={$post->title}");
-            Log::info('PostController:createPost — post created', ['post_id' => $post->id, 'user_id' => $post->user_id, 'title' => $post->title]);
+            Log::info("Log in here.");
             return redirect('/')->with('success', 'Post created!');
         } catch (\Exception $e) {
             error_log("Post creation failed: " . $e->getMessage());
