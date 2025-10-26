@@ -12,8 +12,12 @@ class PostController extends Controller
 {
     public function createPost(Request $request){
         if (!auth()->check()) {
+            error_log('User not authenticated when trying to create post.');
             return redirect('/')->with('error', 'You must be logged in to create a post.');
         }
+
+        error_log('User ID for post creation: ' . auth()->id());
+        error_log('Incoming post data: ' . json_encode($request->all()));
 
         $incomingFields = $request->validate([
             'title' => ['required', 'min:3', 'max:100'],
@@ -27,7 +31,7 @@ class PostController extends Controller
         try {
             $post = Post::create($incomingFields);
             error_log("Post created id={$post->id} user_id={$post->user_id} title={$post->title}");
-            Log::info("Log in here.");
+            Log::info("Post created", ['id' => $post->id, 'user_id' => $post->user_id, 'title' => $post->title]);
             return redirect('/')->with('success', 'Post created!');
         } catch (\Exception $e) {
             error_log("Post creation failed: " . $e->getMessage());

@@ -19,7 +19,7 @@ class Post extends Model
     }
 
     public function usersEmail(){
-        // Use Eloquent belongsTo directly, fetch the related user, and return email
-        return $this->belongsTo(User::class, 'user_id')->first()?->email;
+        // Use the loaded user relationship to avoid extra queries and relationship confusion
+        return $this->user?->email;
     }
 }
