@@ -15,8 +15,14 @@
         <h2>Create a new post</h2>
         <form action="/create-post" method="POST">
         @csrf
-        <input type='text' name='title' placeholder='title'>
-        <textarea name="body" placeholder="body Content"></textarea>
+        <input type='text' name='title' placeholder='title' value="{{ old('title') }}">
+        @error('title')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
+        <textarea name="body" placeholder="body Content">{{ old('body') }}</textarea>
+        @error('body')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
         <button type="submit">Save Post</button>
         </form>
     </div>
@@ -34,6 +40,7 @@
                 @csrf
                 @method('DELETE')
                 <button type="submit">Delete Post</button>
+            </form>
             <hr>
         </div>
         @endforeach
